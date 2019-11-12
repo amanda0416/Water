@@ -1,6 +1,7 @@
 package com.fju.water;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         edMonth = findViewById(R.id.month);
         edNext = findViewById(R.id.next);
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculate();
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         edMonth = findViewById(R.id.month);
         edNext = findViewById(R.id.next);
     }
-    public void calculate(View view){
+    public void calculate(){
         if(!TextUtils.isEmpty(edMonth.getText().toString())){
             float degree = Float.parseFloat(edMonth.getText().toString());
             float money = 0 ;
@@ -58,12 +67,14 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 money = 12.075f * degree-110.25f;
             }
-            new AlertDialog.Builder(this).setTitle("每月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    reset();
-                }
-            }).show();
+            Intent intent = new Intent(this,ResultActivity.class);   // this = MainActivity本身
+            startActivity(intent);
+//            new AlertDialog.Builder(this).setTitle("每月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    reset();
+//                }
+//            }).show();
         }else {
             if(!TextUtils.isEmpty(edNext.getText().toString())){
                 float degree = Float.parseFloat(edNext.getText().toString());
@@ -77,16 +88,17 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     money = 12.075f * degree-220.5f;
                 }
-                new AlertDialog.Builder(this).setTitle("隔月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        reset();
-                    }
-                }).show();
+//                new AlertDialog.Builder(this).setTitle("隔月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        reset();
+//                    }
+//                }).show();
             }
-        }if(TextUtils.isEmpty(edMonth.getText().toString())&&TextUtils.isEmpty(edNext.getText().toString())){
-            new AlertDialog.Builder(this).setTitle("抄表費用").setMessage("費用 無法計算").setPositiveButton("Ok", null).show();
         }
+//        if(TextUtils.isEmpty(edMonth.getText().toString())&&TextUtils.isEmpty(edNext.getText().toString())){
+//            new AlertDialog.Builder(this).setTitle("抄表費用").setMessage("費用 無法計算").setPositiveButton("Ok", null).show();
+//        }
     }
 
     @Override
