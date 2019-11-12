@@ -64,27 +64,29 @@ public class MainActivity extends AppCompatActivity {
                     reset();
                 }
             }).show();
-        }
-        if(!TextUtils.isEmpty(edNext.getText().toString())){
-            float degree = Float.parseFloat(edNext.getText().toString());
-            float money = 0 ;
-            if(degree<21){
-                money = 7.35f * degree;
-            }else if(degree<61){
-                money = 9.45f * degree-42;
-            }else if(degree<101){
-                money = 11.55f * degree-168;
-            }else{
-                money = 12.075f * degree-220.5f;
-            }
-            new AlertDialog.Builder(this).setTitle("隔月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    reset();
+        }else {
+            if(!TextUtils.isEmpty(edNext.getText().toString())){
+                float degree = Float.parseFloat(edNext.getText().toString());
+                float money = 0 ;
+                if(degree<21){
+                    money = 7.35f * degree;
+                }else if(degree<61){
+                    money = 9.45f * degree-42;
+                }else if(degree<101){
+                    money = 11.55f * degree-168;
+                }else{
+                    money = 12.075f * degree-220.5f;
                 }
-            }).show();
+                new AlertDialog.Builder(this).setTitle("隔月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        reset();
+                    }
+                }).show();
+            }
+        }if(TextUtils.isEmpty(edMonth.getText().toString())&&TextUtils.isEmpty(edNext.getText().toString())){
+            new AlertDialog.Builder(this).setTitle("抄表費用").setMessage("費用 無法計算").setPositiveButton("Ok", null).show();
         }
-
     }
 
     @Override
