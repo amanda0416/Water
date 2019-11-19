@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 money = 12.075f * degree-110.25f;
             }
             Intent intent = new Intent(this,ResultActivity.class);   // this = MainActivity本身
+            intent.putExtra("MONEY",money);
             startActivity(intent);
 //            new AlertDialog.Builder(this).setTitle("每月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 //                @Override
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     money = 12.075f * degree-220.5f;
                 }
+                Intent intent = new Intent(this,ResultActivity.class);   // this = MainActivity本身
+                intent.putExtra("MONEY",money);
+                startActivity(intent);
 //                new AlertDialog.Builder(this).setTitle("隔月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {
