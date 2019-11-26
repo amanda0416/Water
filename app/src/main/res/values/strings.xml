@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Water</string>
     <string name="action_settings">Settings</string>
+    <string name="monthly">Monthly</string>
+    <string name="every_other_month">Every other month</string>
+    <string name="water_fee">Water Fee</string>
+    <string name="water_fee_result">Water fee Result</string>
+    <string name="fee">Fee :</string>
+    <string name="ok">Ok</string>
+    <string name="every_other_month_fee">Every other month Water Fee</string>
+    <string name="monthly_fee">Monthly Water Fee</string>
+    <string name="extra_money">MONEY</string>
 </resources>

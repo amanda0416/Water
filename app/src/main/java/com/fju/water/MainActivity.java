@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 money = 12.075f * degree-110.25f;
             }
             Intent intent = new Intent(this,ResultActivity.class);   // this = MainActivity本身
-            intent.putExtra("MONEY",money);
+            intent.putExtra(getString(R.string.extra_money),money);
             startActivity(intent);
-//            new AlertDialog.Builder(this).setTitle("每月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//            new AlertDialog.Builder(this).setTitle(getString(R.string.monthly_fee)).setMessage(getString(R.string.fee)+money).setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 //                @Override
 //                public void onClick(DialogInterface dialog, int which) {
 //                    reset();
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,ResultActivity.class);   // this = MainActivity本身
                 intent.putExtra("MONEY",money);
                 startActivity(intent);
-//                new AlertDialog.Builder(this).setTitle("隔月抄表費用").setMessage("費用 : "+money).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                new AlertDialog.Builder(this).setTitle(getString(R.string.every_other_month_fee)).setMessage(getString(R.string.fee)+money).setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {
 //                        reset();
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 //        if(TextUtils.isEmpty(edMonth.getText().toString())&&TextUtils.isEmpty(edNext.getText().toString())){
-//            new AlertDialog.Builder(this).setTitle("抄表費用").setMessage("費用 無法計算").setPositiveButton("Ok", null).show();
+//            new AlertDialog.Builder(this).setTitle("抄表費用").setMessage("Fee Can Not Calculate").setPositiveButton("Ok", null).show();
 //        }
     }
 
