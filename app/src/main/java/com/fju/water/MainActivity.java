@@ -16,12 +16,16 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText edMonth;
-    private EditText edNext;
+    //private EditText edNext;
+    boolean isNext = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         edMonth = findViewById(R.id.month);
-        edNext = findViewById(R.id.next);
+       // edNext = findViewById(R.id.next);
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,12 +51,23 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Switch sw = findViewById(R.id.sw);
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isNext = isChecked;
+                TextView text = findViewById(R.id.type);
+                text.setText(isNext ? getString(R.string.every_other_month) : getString(R.string.monthly));
+            }
+        });
+
     }
     public void reset(){
         edMonth.setText("");
-        edNext.setText("");
+        //edNext.setText("");
         edMonth = findViewById(R.id.month);
-        edNext = findViewById(R.id.next);
+       // edNext = findViewById(R.id.next);
     }
     public void calculate(){
         if(!TextUtils.isEmpty(edMonth.getText().toString())){
@@ -76,30 +91,32 @@ public class MainActivity extends AppCompatActivity {
 //                    reset();
 //                }
 //            }).show();
-        }else {
-            if(!TextUtils.isEmpty(edNext.getText().toString())){
-                float degree = Float.parseFloat(edNext.getText().toString());
-                float money = 0 ;
-                if(degree<21){
-                    money = 7.35f * degree;
-                }else if(degree<61){
-                    money = 9.45f * degree-42;
-                }else if(degree<101){
-                    money = 11.55f * degree-168;
-                }else{
-                    money = 12.075f * degree-220.5f;
-                }
-                Intent intent = new Intent(this,ResultActivity.class);   // this = MainActivity本身
-                intent.putExtra("MONEY",money);
-                startActivity(intent);
-//                new AlertDialog.Builder(this).setTitle(getString(R.string.every_other_month_fee)).setMessage(getString(R.string.fee)+money).setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        reset();
-//                    }
-//                }).show();
-            }
         }
+
+//        else {
+//            if(!TextUtils.isEmpty(edNext.getText().toString())){
+//                float degree = Float.parseFloat(edNext.getText().toString());
+//                float money = 0 ;
+//                if(degree<21){
+//                    money = 7.35f * degree;
+//                }else if(degree<61){
+//                    money = 9.45f * degree-42;
+//                }else if(degree<101){
+//                    money = 11.55f * degree-168;
+//                }else{
+//                    money = 12.075f * degree-220.5f;
+//                }
+//                Intent intent = new Intent(this,ResultActivity.class);   // this = MainActivity本身
+//                intent.putExtra("MONEY",money);
+//                startActivity(intent);
+////                new AlertDialog.Builder(this).setTitle(getString(R.string.every_other_month_fee)).setMessage(getString(R.string.fee)+money).setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+////                    @Override
+////                    public void onClick(DialogInterface dialog, int which) {
+////                        reset();
+////                    }
+////                }).show();
+//            }
+//        }
 //        if(TextUtils.isEmpty(edMonth.getText().toString())&&TextUtils.isEmpty(edNext.getText().toString())){
 //            new AlertDialog.Builder(this).setTitle("抄表費用").setMessage("Fee Can Not Calculate").setPositiveButton("Ok", null).show();
 //        }
