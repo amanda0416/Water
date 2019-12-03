@@ -123,14 +123,26 @@ public class MainActivity extends AppCompatActivity {
         if(!TextUtils.isEmpty(edMonth.getText().toString())){
             float degree = Float.parseFloat(edMonth.getText().toString());
             float money = 0 ;
-            if(degree<11){
-                money = 7.35f * degree;
-            }else if(degree<31){
-                money = 9.45f * degree-21;
-            }else if(degree<51){
-                money = 11.55f * degree-84;
-            }else{
-                money = 12.075f * degree-110.25f;
+            if (isNext == false){
+                if(degree<11){
+                    money = 7.35f * degree;
+                }else if(degree<31){
+                    money = 9.45f * degree-21;
+                }else if(degree<51){
+                    money = 11.55f * degree-84;
+                }else{
+                    money = 12.075f * degree-110.25f;
+                }
+            }if (isNext == true){
+                if(degree<21){
+                    money = 7.35f * degree;
+                }else if(degree<61){
+                    money = 9.45f * degree-42;
+                }else if(degree<101){
+                    money = 11.55f * degree-168;
+                }else{
+                    money = 12.075f * degree-220.5f;
+                }
             }
             Intent intent = new Intent(this,ResultActivity.class);   // this = MainActivity本身
             intent.putExtra(getString(R.string.extra_money),money);
